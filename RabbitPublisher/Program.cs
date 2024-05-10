@@ -17,14 +17,11 @@ namespace RabbitPublisher
             {
                 channel.QueueDeclare("step-queue", true, false, false);
 
-                var message = "[" + DateTime.Now.ToLongTimeString() + "] Test Message.";
+                var message = Console.ReadLine();
+                message = $"[" + DateTime.Now.ToLongTimeString() + "] " + message;
                 var body = Encoding.UTF8.GetBytes(message);
 
                 channel.BasicPublish("", "step-queue", null, body);
-
-                Console.WriteLine("Sent successfully.");
-
-                Console.ReadLine();
             }
         }
     }

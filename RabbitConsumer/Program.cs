@@ -18,15 +18,15 @@ namespace RabbitConsumer
             var consumer = new EventingBasicConsumer(channel);
             channel.BasicConsume("step-queue", true, consumer);
 
-            consumer.Received += Consumer_Received;
+            consumer.Received += consumerReceived;
 
             Console.ReadLine();
         }
 
-        private static void Consumer_Received(object? sender, BasicDeliverEventArgs e)
+        private static void consumerReceived(object? sender, BasicDeliverEventArgs e)
         {
             var message = Encoding.UTF8.GetString(e.Body.ToArray());
-            Console.WriteLine($"Received Message: {message}");
+            Console.WriteLine(message);
         }
     }
 }
